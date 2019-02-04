@@ -1,0 +1,44 @@
+
+• Keywords: and, or, not, equal,
+append, concat, set, deffun, for,
+while, if, exit
+• Operators: +, -, /, , (, ), *
+• Terminals:
+Keywords, operators, 0-9
+BinaryValue -> true | false
+IntegerValue -> [-][1-9][0-9]+
+Id – [a-zA-z]+
+
+
+START -> INPUT
+
+INPUT -> EXPI | EXPLISTI
+
+EXPI -> (set ID EXPI);
+EXPI -> (+ EXPI EXPI)
+EXPI -> (- EXPI EXPI)
+EXPI -> (* EXPI EXPI)
+EXPI -> (/ EXPI EXPI)
+// EXPI -> ID | (ID EXPLISTI) | VALUES
+EXPI -> ID | (ID EXPLISTI) | IntegerValue
+EXPI -> (deffun ID IDLIST EXPLISTI) ;
+EXPI -> (ID EXPLISTI)
+EXPI -> (defvar ID EXPI);
+EXPI -> (if EXPB EXPLISTI);
+EXPI -> (if EXPB EXPLISTI EXPLISTI);
+EXPI -> (while (EXPB) EXPLISTI);
+EXPI -> (for (ID EXPI EXPI) EXPLISTI);
+
+
+EXPB -> (and EXPB EXPB)
+EXPB -> (or EXPB EXPB)
+EXPB -> (not EXPB)
+EXPB -> (equal EXPB EXPB)
+EXPB -> (equal EXPI EXPI)
+EXPB -> BinaryValue
+
+EXPLISTI -> (concat EXPLISTI EXPLISTI) | (append EXPI EXPLISTI) | null | ‘( VALUES ) | ‘() | EXPI
+
+VALUES -> VALUES IntegerValue | IntegerValue
+
+IDLIST -> ID | (IDLIST) | ID IDLIST
